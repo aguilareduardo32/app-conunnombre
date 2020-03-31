@@ -6,8 +6,10 @@ const User = require("../models/User-model");
 
  exports.create = (req, res) => {
   
-      const username = req.body.username;
+      const username = req.body.user;
       const  password = req.body.password;
+
+
 
             if (!username || !password) {
               res.status(400).json({ message: 'Provide username and password' });
@@ -30,12 +32,18 @@ const User = require("../models/User-model");
                 return;
               }
 
-              const salt = bcrypt.genSalt(10);
+              const salt = bcrypt.genSaltSync(10);
               const hashPass = bcrypt.hashSync(password, salt);
 
               const aNewUser = new User({
                   username: username,
-                  password: hashPass
+                  password: hashPass,
+                  phone: req.body.phone,
+                  email: req.body.email,
+                  rol: req.body.rol,
+                  birthday: req.body.birthday,
+                  gender: req.body.gender,
+                  
               });
 
               aNewUser.save(err => {

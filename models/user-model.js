@@ -1,8 +1,9 @@
 
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const userSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
+const userSchema = new Schema({
+  
   user: String,
 
    password: {
@@ -34,11 +35,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     default: 'other'
 },
-  password: {
-    type: String,
-    required: true,
-    minlength: 8,
-},
+  
 
  //  trips: {type: Schema.Types.ObjectId, 
    // ref: 'Trip',
