@@ -4,9 +4,9 @@ const bcrypt     = require('bcryptjs');
 const User = require("../models/User-model");
 
 
- exports.create = (req, res) => {
+ exports.signup = (req, res) => {
   
-      const username = req.body.user;
+      const username = req.body.username;
       const  password = req.body.password;
 
 
@@ -17,7 +17,7 @@ const User = require("../models/User-model");
             }
 
             if( password.length < 7){
-              res.status(400).json({ message: "please make your passwrod at least 8 characters"});
+              res.status(400).json({ message: "please make your password at least 8 characters"});
               return;
             }
 
@@ -67,3 +67,46 @@ const User = require("../models/User-model");
                });
        });
   }
+
+  exports.login = (req,res) => {
+    passport.authenticate('local', (err, theUser, failureDetails) => {
+      if (err) {
+          res.status(500).json({ message: 'Something went wrong authenticating user' });
+          return;
+      }
+  
+      if (!theUser) {
+          // "failureDetails" contains the error messages
+          // from our logic in "LocalStrategy" { message: '...' }.
+          res.status(401).json(failureDetails);
+          return;
+      }
+
+      // save user in session
+      req.login(theUser, (err) => {
+          if (err) {
+              res.status(500).json({ message: 'Session save went bad.' });
+              return;
+          }
+
+          // We are now logged in (that's why we can also send req.user)
+          res.status(200).json(theUser);
+      });
+  })(req, res);
+ };
+
+  exports.logout = (req, res) => {
+     // req.logout() is defined by passport
+    req.logout();
+    res.status(200).json({ message: 'Log out success!' });
+  }
+
+  exports.loggedin = (req, res) => {
+          // req.isAuthenticated() is defined by passport
+    if (req.isAuthenticated()) {
+      res.status(200).json(req.user);
+      return;
+  }
+  res.status(403).json({ message: 'Unauthorized' });
+  }
+  

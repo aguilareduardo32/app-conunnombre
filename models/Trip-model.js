@@ -5,8 +5,8 @@ const Schema = mongoose.Schema;
    hour: Number,
    from: '',
    destiny: '',
-   pilot : {type: Schema.Types.ObjectId, ref: 'Pilot'},
-    copilots: [{type: Schema.Types.ObjectId, ref: 'Pilot',
+   pilot: {type: Schema.Types.ObjectId, ref: 'User'},
+    copilots: [{type: Schema.Types.ObjectId, ref: 'User',
                 min: 0,
                 max: 3
               }]
