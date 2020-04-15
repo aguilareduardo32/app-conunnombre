@@ -1,4 +1,3 @@
-const mongoose = require("mongoose");
 const passport   = require('passport');
 const bcrypt     = require('bcryptjs');
 const User = require("../models/User-model");
@@ -41,14 +40,13 @@ const User = require("../models/User-model");
                   phone: req.body.phone,
                   email: req.body.email,
                   rol: req.body.rol,
-                  birthday: req.body.birthday,
-                  gender: req.body.gender,
                   
               });
 
               aNewUser.save(err => {
                 if(err) {
                   res.status(400).json({ message: 'Saving user to database went wrong.' });
+                  console.log(err)
                   return;
                 }
                 // Automatically log in user after sign up
@@ -69,6 +67,7 @@ const User = require("../models/User-model");
   }
 
   exports.login = (req,res) => {
+
     passport.authenticate('local', (err, theUser, failureDetails) => {
       if (err) {
           res.status(500).json({ message: 'Something went wrong authenticating user' });
@@ -93,10 +92,11 @@ const User = require("../models/User-model");
           res.status(200).json(theUser);
       });
   })(req, res);
+
  };
 
   exports.logout = (req, res) => {
-     // req.logout() is defined by passport
+ 
     req.logout();
     res.status(200).json({ message: 'Log out success!' });
   }

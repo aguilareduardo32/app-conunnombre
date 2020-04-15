@@ -4,7 +4,10 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   
-  username: String,
+  username: {
+    type: String,
+    required: true
+  } ,
 
    password: {
     type: String,
@@ -12,7 +15,7 @@ const userSchema = new Schema({
      minlength: 8,
 },
    phone: {
-    type: String,
+    type: Number,
     required: true
 },
    email: {
@@ -24,22 +27,8 @@ const userSchema = new Schema({
      type: String,
      required: true,
      enum : ['PILOT','COPILOT']
-},
-   birthday: {
-    type: Date,
-    required: true
-},
-   gender: {
-    type:  String,
-    enum: ['male', 'female', 'other'],
-    required: true,
-    default: 'other'
-},
-  
+}
 
- //  trips: {type: Schema.Types.ObjectId, 
-   // ref: 'Trip',
- //  required: false}
-        });
+});
 
 module.exports = mongoose.model('User', userSchema)

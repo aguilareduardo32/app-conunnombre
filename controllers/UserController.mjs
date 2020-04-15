@@ -1,6 +1,5 @@
 import User from '../models/User-model.mjs';
 import Trip from '../models/Trip-model.mjs';
-const passport   = require('passport');
 const bcrypt     = require('bcryptjs');
 
 export async function index(req, res) {

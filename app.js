@@ -6,23 +6,14 @@ const cookieParser = require('cookie-parser');
 const mongoose     = require('mongoose');
 const favicon      = require('serve-favicon');
 const hbs          = require('hbs');
-
+const cors = require('cors');
 const logger       = require('morgan');
 const path         = require('path');
+const session       = require('express-session');
+const passport      = require('passport');
+require('./configs/passport');
 
 
-
-
-// WHEN INTRODUCING USERS DO THIS:
-// INSTALL THESE DEPENDENCIES: passport-local, passport, bcryptjs, express-session
-// AND UN-COMMENT OUT FOLLOWING LINES:
-
- const session       = require('express-session');
- const passport      = require('passport');
-
-    require('./configs/passport');
-
-// IF YOU STILL DIDN'T, GO TO 'configs/passport.js' AND UN-COMMENT OUT THE WHOLE FILE
 
 mongoose
   .connect('mongodb://localhost/project-management-server', {useNewUrlParser: true})
@@ -34,7 +25,7 @@ mongoose
   });
 
 const app_name = require('./package.json').name;
-const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
+
 
 
 
@@ -65,16 +56,19 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// USE passport.initialize() and passport.session() HERE:
 
 app.use(passport.initialize());
 app.use(passport.session());
-// default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+
+app.locals.title = 'Express ';
 
 
 // ADD CORS SETTINGS HERE TO ALLOW CROSS-ORIGIN INTERACTION:
 
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000'] // <== URL of our React app 
+}));
 
 
 // ROUTES MIDDLEWARE STARTS HERE:
