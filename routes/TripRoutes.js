@@ -21,6 +21,7 @@ const checkCopilot = checkRoles('COPILOT');
 
 router.get('/trips', TripController.checkTrips);
 router.get('/:id', TripController.getSpecificTrip);
+
 router.post('/create',  TripController.createTrip);
 router.delete('/:id', checkPilot, TripController.deleteTrip);
 router.put('/:id',  TripController.addCuCopilot);

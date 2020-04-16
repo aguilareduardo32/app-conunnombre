@@ -55,10 +55,10 @@ const Trip = require('../models/Trip-model');
 
  
   exports.addCuCopilot = (req, res) => {
-
+    console.log(req.user)
     copilotId = req.user._id
   
-    Trip.findByIdAndUpdate(req.params.id, {$push:{ copilots: copilotId, $slice: 2 } })
+    Trip.findByIdAndUpdate(req.params.id, {$push:{ copilots: req.user._id, $slice: 2 } })
       
       .then(() => {
         
