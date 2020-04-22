@@ -35,10 +35,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use((req, res, next) => {
-  // If no routes match, send them the React HTML.
-  res.sendFile(__dirname + "/public/index.html");
-});
+
 
 // Express View engine setup
 
@@ -86,5 +83,10 @@ const TripRoutes = require('./routes/TripRoutes');
 app.use('/trip', TripRoutes);
 
 app.use('/api', require('./routes/PicUpload'));
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;
