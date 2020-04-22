@@ -77,7 +77,7 @@ app.use(cors({
 
 
 const AuthRoutes = require('./routes/AuthRoutes');
-app.use('api/auth', AuthRoutes);
+app.use('/auth', AuthRoutes);
 const TripRoutes = require('./routes/TripRoutes');
 app.use('/trip', TripRoutes);
 
