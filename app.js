@@ -75,11 +75,10 @@ app.use(cors({
 
 // ROUTES MIDDLEWARE STARTS HERE:
 
-
 const AuthRoutes = require('./routes/AuthRoutes');
-app.use('/', AuthRoutes);
+app.use('/api', AuthRoutes);
 const TripRoutes = require('./routes/TripRoutes');
-app.use('/trip', TripRoutes);
+app.use('/api', TripRoutes);
 
 app.use('/api', require('./routes/PicUpload'));
 

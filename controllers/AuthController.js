@@ -112,7 +112,8 @@ const User = require("../models/User-model");
     if (req.isAuthenticated()) {
       res.status(200).json(req.user);
       return;
-  }
+  }else {
   res.status(403).json({ message: 'Unauthorized' });
+    } 
   }
   
