@@ -21,11 +21,11 @@ const userSchema = new Schema({
 },
    phone: {
     type: Number,
-    required: true
+   // required: true
 },
    email: {
    type: String,
-    required: true,
+  //  required: true,
      unique: true,
 },
    rol: {
