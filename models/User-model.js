@@ -6,7 +6,7 @@ const userSchema = new Schema({
 
   profilePic: { 
     type: String, 
-    required: true 
+    
   } ,
   
   username: {
